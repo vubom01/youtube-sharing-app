@@ -9,6 +9,12 @@ interface ISharePostModalProps {
   messageApi: MessageInstance;
 }
 
+export const isValidYouTubeUrl = (url: string) => {
+  const regex =
+    /^((?:https?:)?\/\/)?((?:www|m)\.)?(youtube(?:-nocookie)?\.com|youtu.be)(\/(?:[\w-]+\?v=|embed\/|live\/|v\/)?)([\w-]+)(\S+)?$/;
+  return regex.test(url);
+};
+
 const SharePostModal = (props: ISharePostModalProps) => {
   const { showModal, setShowModal, messageApi } = props;
   const [youtubeURL, setYouTubeURL] = useState<string>('');
@@ -17,12 +23,6 @@ const SharePostModal = (props: ISharePostModalProps) => {
 
   const onCloseModal = () => {
     setShowModal(false);
-  };
-
-  const isValidYouTubeUrl = (url: string) => {
-    const regex =
-      /^((?:https?:)?\/\/)?((?:www|m)\.)?(youtube(?:-nocookie)?\.com|youtu.be)(\/(?:[\w-]+\?v=|embed\/|live\/|v\/)?)([\w-]+)(\S+)?$/;
-    return regex.test(url);
   };
 
   const onCreatePost = async () => {
