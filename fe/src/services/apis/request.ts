@@ -1,9 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
-import { requestHelpers } from 'helpers';
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { userServices } from '../index';
 
 const baseClient = axios.create({
@@ -25,19 +20,11 @@ const responseSuccessInterceptor = (response: AxiosResponse) => {
   return response;
 };
 
-const responseErrorInterceptor = (error: AxiosError) => {
-  requestHelpers.handleResponseError(error);
-  return Promise.reject(error);
-};
-
 const clients = [baseClient];
 
 clients.forEach((client) => {
   client.interceptors.request.use(requestInterceptor);
-  client.interceptors.response.use(
-    responseSuccessInterceptor,
-    responseErrorInterceptor
-  );
+  client.interceptors.response.use(responseSuccessInterceptor);
 });
 
 export default {

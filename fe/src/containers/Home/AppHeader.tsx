@@ -2,8 +2,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Button, Input, Layout, message, Space, Spin } from 'antd';
 import SharePostModal from 'components';
 import { userHooks } from 'hooks';
-import { debounce } from 'lodash';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { userServices } from 'services';
 
 const { Header } = Layout;
@@ -14,23 +13,7 @@ export const AppHeader = () => {
   const [password, setPassword] = useState<string>('');
   const [showModal, setShowModal] = useState(false);
 
-  const { loading, login } = userHooks.useLogin();
-
-  const onChangeEmail = useCallback(
-    debounce((value: string) => {
-      value = value.trim();
-      setEmail(value);
-    }, 100),
-    []
-  );
-
-  const onChangePassword = useCallback(
-    debounce((value: string) => {
-      value = value.trim();
-      setPassword(value);
-    }, 100),
-    []
-  );
+  const { loading, login } = userHooks.useLogin(messageApi);
 
   const onLogin = async () => {
     if (!email) {
@@ -69,13 +52,15 @@ export const AppHeader = () => {
               <div>
                 <Input
                   placeholder="email"
-                  onChange={(e) => onChangeEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
               <Input.Password
                 placeholder="password"
-                onChange={(e) => onChangePassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Button onClick={onLogin}>Login/ Register</Button>
             </Space>

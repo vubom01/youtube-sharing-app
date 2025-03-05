@@ -1,7 +1,6 @@
 import { Input, Modal } from 'antd';
 import { YOUTUBE_REGEX } from 'constants/youtube';
-import { debounce } from 'lodash';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { getYoutubeMetadata } from 'services/youtube';
 
 interface ISharePostModalProps {
@@ -12,14 +11,6 @@ interface ISharePostModalProps {
 const SharePostModal: React.FC<ISharePostModalProps> = (props) => {
   const { showModal, setShowModal } = props;
   const [youtubeURL, setYouTubeURL] = useState<string>();
-
-  const onChangeYoutubeURL = useCallback(
-    debounce((value: string) => {
-      value = value.trim();
-      setYouTubeURL(value);
-    }, 300),
-    []
-  );
 
   const onCloseModal = () => {
     setShowModal(false);
@@ -40,7 +31,7 @@ const SharePostModal: React.FC<ISharePostModalProps> = (props) => {
     <Modal open={showModal} onCancel={onCloseModal} onOk={onCreatePost}>
       <div>Youtube URL:</div>
       <Input
-        onChange={(e) => onChangeYoutubeURL(e.target.value)}
+        onChange={(e) => setYouTubeURL(e.target.value)}
         placeholder="https://www.youtube.com/watch?v="
       />
     </Modal>
