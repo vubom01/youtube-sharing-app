@@ -5,3 +5,8 @@ type BaseRes struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
+
+type PaginationReq struct {
+	Page     int64 `json:"page"`
+	PageSize int64 `json:"pageSize"`
+}

@@ -32,3 +32,7 @@ func toPostModel(userId int64, req CreatePostReq) models.Post {
 		Description: req.Description,
 	}
 }
+
+func (s *Service) List(req common.PaginationReq) (ListPostResp, error) {
+	return ListPostResp{}, nil
+}

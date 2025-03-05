@@ -44,3 +44,27 @@ func (h *Handler) CreatePost(c *gin.Context) {
 	}
 	common.WriteSuccess(c, nil)
 }
+
+// List godoc
+// @Summary      get list posts
+// @Tags         Posts
+// @Accept       json
+// @Produce      json
+// @Success      200
+// @Router       /api/v1/posts [get]
+// @Param 		 page query int false "page"
+// @Success		 200 {object} ListOutput "Success"
+func (h *Handler) List(c *gin.Context) {
+	pagination, err := common.GetPagination(c)
+	if err != nil {
+		common.WriteError(c, err)
+		return
+	}
+
+	res, err := h.service.List(pagination)
+	if err != nil {
+		common.WriteError(c, err)
+		return
+	}
+	common.WriteSuccess(c, res)
+}

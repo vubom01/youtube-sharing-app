@@ -52,7 +52,9 @@ export const AppHeader = () => {
           </Space>
           {currentUser ? (
             <Space>
-              <div>Welcome {currentUser?.email}</div>
+              <div>
+                Welcome <b>{currentUser?.email}</b>
+              </div>
               <Button onClick={onSharePost}>Share a movie</Button>
               <Button onClick={onLogout}>Logout</Button>
             </Space>
