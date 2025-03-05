@@ -2,7 +2,6 @@ package auth
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/youtubeSharing/models"
 	"github.com/youtubeSharing/services/common"
 )
 
@@ -48,12 +47,11 @@ func (h *Handler) Login(c *gin.Context) {
 // @Success      200 {object} common.BaseRes
 // @Router       /api/v1/me [get]
 func (h *Handler) Me(c *gin.Context) {
-	resp, exists := c.Get("user")
-	if !exists {
-		common.WriteError(c, common.ErrUnauthenticated)
+	user, err := common.GetCurrentUser(c)
+	if err != nil {
+		common.WriteError(c, err)
 		return
 	}
-	user := resp.(models.User)
 	common.WriteSuccess(c, MeResp{
 		Id:    user.Id,
 		Email: user.Email,

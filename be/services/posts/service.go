@@ -1,22 +1,34 @@
 package posts
 
-import "github.com/youtubeSharing/models"
+import (
+	"github.com/youtubeSharing/models"
+	postrepo "github.com/youtubeSharing/repo/post"
+	"github.com/youtubeSharing/services/common"
+)
 
 type Service struct {
-	repo *Repo
+	repo *postrepo.Repo
 }
 
 func NewService() *Service {
 	return &Service{
-		repo: NewRepo(),
+		repo: postrepo.NewRepo(),
 	}
 }
 
-func (s *Service) CreatePost(post models.Post) string {
-	post.UserId = 1
-	err := s.repo.CreatePost(post)
+func (s *Service) CreatePost(userId int64, req CreatePostReq) error {
+	err := s.repo.InsertPost(toPostModel(userId, req))
 	if err != nil {
-		return ErrInternal
+		return common.ErrExecuteIntoDB
 	}
-	return SuccessMessage
+	return nil
+}
+
+func toPostModel(userId int64, req CreatePostReq) models.Post {
+	return models.Post{
+		UserId:      userId,
+		YoutubeURL:  req.YoutubeURL,
+		Title:       req.Title,
+		Description: req.Description,
+	}
 }

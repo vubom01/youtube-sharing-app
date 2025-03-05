@@ -1,4 +1,4 @@
-package posts
+package postrepo
 
 import (
 	"github.com/jmoiron/sqlx"
@@ -17,14 +17,11 @@ func NewRepo() *Repo {
 	}
 }
 
-func (r *Repo) CreatePost(post models.Post) error {
-	query := `
-		INSERT INTO posts(user_id, youtube_url, title, description) 
-		    VALUE(:user_id, :youtube_url, :title, :description)
-	`
+func (r *Repo) InsertPost(post models.Post) error {
+	query := `INSERT INTO posts(user_id, youtube_url, title, description) VALUE(:user_id, :youtube_url, :title, :description)`
 	_, err := r.conn.NamedExec(query, post)
 	if err != nil {
-		log.Printf("Error create post: %s", err.Error())
+		log.Printf("Error inserting post: %s", err.Error())
 	}
 	return err
 }

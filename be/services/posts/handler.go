@@ -2,8 +2,7 @@ package posts
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/youtubeSharing/models"
-	"net/http"
+	"github.com/youtubeSharing/services/common"
 )
 
 type Handler struct {
@@ -21,30 +20,27 @@ func NewHandler() *Handler {
 // @Tags         Posts
 // @Accept       json
 // @Produce      json
+// @Param 		 Authorization header string true "Authorization"
 // @Param        createPostRequest body CreatePostReq true "CreatePost"
-// @Success      200 {object} BaseRes
+// @Success      200 {object} common.BaseRes
 // @Router       /api/v1/posts [post]
 func (h *Handler) CreatePost(c *gin.Context) {
-	var req CreatePostReq
-	err := c.BindJSON(&req)
+	user, err := common.GetCurrentUser(c)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, BaseRes{
-			Message: err.Error(),
-		})
+		common.WriteError(c, err)
 		return
 	}
-	post := transformCreatePostRequestToPostModel(req)
-	message := h.service.CreatePost(post)
-	res := BaseRes{
-		Message: message,
-	}
-	c.JSON(http.StatusOK, res)
-}
 
-func transformCreatePostRequestToPostModel(req CreatePostReq) models.Post {
-	return models.Post{
-		YoutubeURL:  req.YoutubeURL,
-		Title:       req.Title,
-		Description: req.Description,
+	var req CreatePostReq
+	err = c.BindJSON(&req)
+	if err != nil {
+		common.WriteError(c, common.ErrBadRequest)
+		return
 	}
+	err = h.service.CreatePost(user.Id, req)
+	if err != nil {
+		common.WriteError(c, err)
+		return
+	}
+	common.WriteSuccess(c, nil)
 }
