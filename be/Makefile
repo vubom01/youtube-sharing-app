@@ -11,7 +11,6 @@ migrate:
 
 go-gen:
 	find . -name \*_mocks.go -type f -delete
-	find . -name \*_wrapper.go -type f -delete
 	go generate ./...
 
 test:
