@@ -1,4 +1,5 @@
 import { getData } from 'helpers/request';
+import { IUser } from 'interfaces/user';
 import { requestServices } from 'services/index';
 
 const { baseClient } = requestServices;
@@ -19,13 +20,17 @@ const isLoggedIn = () => {
   return !!token;
 };
 
-const logout = async () => {
+const logout = () => {
   localStorage.removeItem('token');
-  localStorage.removeItem('email');
 };
 
 const getAccessToken = () => {
   return localStorage.getItem('token');
+};
+
+const getMe = async (): Promise<IUser> => {
+  const response = await baseClient.get('/me');
+  return getData(response);
 };
 
 export default {
@@ -33,4 +38,5 @@ export default {
   isLoggedIn,
   logout,
   getAccessToken,
+  getMe,
 };

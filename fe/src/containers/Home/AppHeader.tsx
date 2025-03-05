@@ -1,17 +1,21 @@
 import { HomeOutlined } from '@ant-design/icons';
 import { Button, Input, Layout, message, Space, Spin } from 'antd';
 import SharePostModal from 'components';
+import { StoreContext } from 'contexts';
 import { userHooks } from 'hooks';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { userServices } from 'services';
 
 const { Header } = Layout;
 
 export const AppHeader = () => {
   const [messageApi, contextHolder] = message.useMessage();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const { currentUser, setCurrentUser } = useContext(StoreContext);
 
   const { loading, login } = userHooks.useLogin(messageApi);
 
@@ -25,6 +29,11 @@ export const AppHeader = () => {
       return;
     }
     await login(email, password);
+  };
+
+  const onLogout = () => {
+    userServices.logout();
+    setCurrentUser(undefined);
   };
 
   const onSharePost = () => {
@@ -41,11 +50,11 @@ export const AppHeader = () => {
             <HomeOutlined size={2} />
             <div style={{ fontWeight: 'bold', fontSize: 24 }}>Funny Movies</div>
           </Space>
-          {userServices.isLoggedIn() ? (
+          {currentUser ? (
             <Space>
-              <div>Welcome Le Huy Vu</div>
+              <div>Welcome {currentUser?.email}</div>
               <Button onClick={onSharePost}>Share a movie</Button>
-              <Button onClick={userServices.logout}>Logout</Button>
+              <Button onClick={onLogout}>Logout</Button>
             </Space>
           ) : (
             <Space>
