@@ -47,7 +47,7 @@ const useListPosts = () => {
       const res = await postServices.getListPosts(params);
       if (res) {
         const { posts, total } = res;
-        setPosts(posts);
+        setPosts(posts ?? []);
         setTotal(total);
       }
     } catch (e) {
