@@ -9,6 +9,11 @@ migrate:
 	echo \# make migrate name="$(name)"
 	go run cmd/migrate/main.go create $(name)
 
+go-gen:
+	find . -name \*_mocks.go -type f -delete
+	find . -name \*_wrapper.go -type f -delete
+	go generate ./...
+
 test:
 	go test -count=1 -p 1 -covermode=count -coverprofile tc-coverage.cov ./...
 

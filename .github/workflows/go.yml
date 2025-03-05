@@ -1,0 +1,46 @@
+name: Go Backend CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: youtube-sharing-test
+          MYSQL_TCP_PORT: 3306
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping -h localhost" --health-interval=10s --health-timeout=5s --health-retries=3
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24
+
+      - name: Install dependencies
+        working-directory: be
+        run: go mod tidy
+
+      - name: Run generate
+        working-directory: be
+        run: make go-gen
+
+      - name: Run tests
+        working-directory: be
+        run: make test
