@@ -9,5 +9,8 @@ migrate:
 	echo \# make migrate name="$(name)"
 	go run cmd/migrate/main.go create $(name)
 
+test:
+	go test -count=1 -p 1 -covermode=count -coverprofile tc-coverage.cov ./...
+
 run:
 	go run cmd/server/main.go

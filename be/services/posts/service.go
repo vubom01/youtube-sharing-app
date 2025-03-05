@@ -1,18 +1,19 @@
 package posts
 
 import (
+	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/models"
 	postrepo "github.com/youtubeSharing/repo/post"
 	"github.com/youtubeSharing/services/common"
 )
 
 type Service struct {
-	repo *postrepo.Repo
+	repo postrepo.IRepo
 }
 
 func NewService() *Service {
 	return &Service{
-		repo: postrepo.NewRepo(),
+		repo: postrepo.NewRepo(mysql.GetMySQLInstance()),
 	}
 }
 

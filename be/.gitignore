@@ -17,3 +17,6 @@
 /.idea
 /docs
 .database
+
+tc-coverage.cov
+/**/*_mocks.go

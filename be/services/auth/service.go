@@ -3,6 +3,7 @@ package auth
 import (
 	"database/sql"
 	"errors"
+	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/helper/jwt"
 	"github.com/youtubeSharing/models"
 	userrepo "github.com/youtubeSharing/repo/user"
@@ -11,12 +12,12 @@ import (
 )
 
 type Service struct {
-	repo *userrepo.Repo
+	repo userrepo.IRepo
 }
 
 func NewService() *Service {
 	return &Service{
-		repo: userrepo.NewRepo(),
+		repo: userrepo.NewRepo(mysql.GetMySQLInstance()),
 	}
 }
 

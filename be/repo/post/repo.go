@@ -2,18 +2,24 @@ package postrepo
 
 import (
 	"github.com/jmoiron/sqlx"
-	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/models"
 	"log"
 )
+
+//go:generate moq -out repo_mocks.go . IRepo
+
+type IRepo interface {
+	InsertPost(post models.Post) error
+	List(page int64, pageSize int64) ([]models.PostDetail, int64, error)
+}
 
 type Repo struct {
 	conn *sqlx.DB
 }
 
-func NewRepo() *Repo {
+func NewRepo(conn *sqlx.DB) IRepo {
 	return &Repo{
-		conn: mysql.GetMySQLInstance(),
+		conn: conn,
 	}
 }
 

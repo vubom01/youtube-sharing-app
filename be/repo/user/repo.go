@@ -3,18 +3,24 @@ package userrepo
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/models"
 	"log"
 )
+
+//go:generate moq -out repo_mocks.go . IRepo
+
+type IRepo interface {
+	InsertUser(user models.User) error
+	GetUserByEmail(email string) (models.User, error)
+}
 
 type Repo struct {
 	conn *sqlx.DB
 }
 
-func NewRepo() *Repo {
+func NewRepo(conn *sqlx.DB) IRepo {
 	return &Repo{
-		conn: mysql.GetMySQLInstance(),
+		conn: conn,
 	}
 }
 

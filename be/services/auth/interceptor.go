@@ -4,18 +4,19 @@ import (
 	"database/sql"
 	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/helper/jwt"
 	userrepo "github.com/youtubeSharing/repo/user"
 	"github.com/youtubeSharing/services/common"
 )
 
 type Interceptor struct {
-	repo *userrepo.Repo
+	repo userrepo.IRepo
 }
 
 func NewInterceptor() *Interceptor {
 	return &Interceptor{
-		repo: userrepo.NewRepo(),
+		repo: userrepo.NewRepo(mysql.GetMySQLInstance()),
 	}
 }
 
