@@ -1,12 +1,14 @@
-import axios from 'axios';
+import { getData } from 'helpers/request';
+import { IYouTubeInfo } from 'interfaces/youtube';
+import { requestServices } from 'services/index';
 
-const API_KEY = 'AIzaSyAAsD1UgvrsqEZnyaliLXuF9yzi8HftOvk';
+const { baseClient } = requestServices;
 
-const getYoutubeMetadata = async (youtubeId: string) => {
-  const response = await axios.get(
-    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${youtubeId}&fields=items/id,items/snippet/title,items/snippet/description&key=${API_KEY}`
-  );
-  return response.data;
+const getYoutubeMetadata = async (youtubeId: string): Promise<IYouTubeInfo> => {
+  const response = await baseClient.get('/youtube', {
+    params: { youtubeId: youtubeId },
+  });
+  return getData(response);
 };
 
 export default {

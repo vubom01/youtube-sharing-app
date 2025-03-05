@@ -1,16 +1,29 @@
+import { MessageInstance } from 'antd/es/message/interface';
 import { DEFAULT_PARAMS } from 'constants/common';
+import { getYoutubeId } from 'helpers/youtube';
 import { ICreatePost, IListPostsReq, IPost } from 'interfaces/post';
 import { useEffect, useState } from 'react';
-import { postServices } from 'services';
+import { postServices, youtubeServices } from 'services';
 
-const useCreatePost = () => {
+const useCreatePost = (messageApi: MessageInstance) => {
   const [loading, setLoading] = useState(false);
 
-  const createPost = async (req: ICreatePost) => {
+  const createPost = async (youtubeURL: string) => {
     try {
       setLoading(true);
+      const youtubeLink = getYoutubeId(youtubeURL);
+      const metadata = await youtubeServices.getYoutubeMetadata(youtubeLink!);
+      console.log(metadata);
+      const req: ICreatePost = {
+        youtubeURL: youtubeURL,
+        title: metadata.title,
+        description: metadata.description,
+      };
       await postServices.createPost(req);
-    } catch (e) {
+      messageApi.success('Youtube URL shared successfully');
+      return true;
+    } catch (e: any) {
+      messageApi.error(e.response.data.message);
     } finally {
       setLoading(false);
     }
