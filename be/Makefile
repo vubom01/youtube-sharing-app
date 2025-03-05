@@ -9,6 +9,9 @@ migrate:
 	echo \# make migrate name="$(name)"
 	go run cmd/migrate/main.go create $(name)
 
+install-tools:
+	go install github.com/matryer/moq
+
 go-gen:
 	find . -name \*_mocks.go -type f -delete
 	go generate ./...

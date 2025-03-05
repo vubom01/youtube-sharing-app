@@ -41,6 +41,10 @@ jobs:
         working-directory: be
         run: go mod tidy
 
+      - name: Install tools
+        working-directory: be
+        run: make install-tools
+
       - name: Run generate
         working-directory: be
         run: make go-gen
