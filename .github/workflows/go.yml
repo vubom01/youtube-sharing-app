@@ -33,6 +33,10 @@ jobs:
         with:
           go-version: 1.24
 
+      - name: Copy env
+        working-directory: be
+        run: cp .env.example .env
+
       - name: Install dependencies
         working-directory: be
         run: go mod tidy
