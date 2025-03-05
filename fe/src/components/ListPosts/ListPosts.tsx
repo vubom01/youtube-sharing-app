@@ -4,9 +4,9 @@ import { getYoutubeId } from 'helpers/youtube';
 import { postHooks } from 'hooks';
 import React from 'react';
 import YouTube from 'react-youtube';
-import './index.css';
+import './ListPosts.css';
 
-export const ListPosts = () => {
+const ListPosts = () => {
   const { loading, posts, total, params, setParams } = postHooks.useListPosts();
 
   return (
@@ -63,3 +63,5 @@ export const ListPosts = () => {
     </div>
   );
 };
+
+export default ListPosts;

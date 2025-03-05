@@ -9,7 +9,7 @@ interface ISharePostModalProps {
   messageApi: MessageInstance;
 }
 
-const SharePostModal: React.FC<ISharePostModalProps> = (props) => {
+const SharePostModal = (props: ISharePostModalProps) => {
   const { showModal, setShowModal, messageApi } = props;
   const [youtubeURL, setYouTubeURL] = useState<string>('');
 

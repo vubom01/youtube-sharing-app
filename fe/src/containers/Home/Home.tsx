@@ -1,10 +1,10 @@
 import { Spin } from 'antd';
-import { ListPosts } from 'containers/Home/ListPosts';
+import AppHeader from 'components/AppHeader';
+import ListPosts from 'components/ListPosts';
 import { StoreContext } from 'contexts';
 import { userHooks } from 'hooks';
 import { IUser } from 'interfaces/user';
 import React, { Suspense, useEffect, useState } from 'react';
-import { AppHeader } from './AppHeader';
 
 const Home: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);

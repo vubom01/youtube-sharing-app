@@ -1,6 +1,6 @@
 import { HomeOutlined } from '@ant-design/icons';
 import { Button, Input, Layout, message, Space, Spin } from 'antd';
-import SharePostModal from 'components';
+import SharePostModal from 'components/SharePostModal';
 import { StoreContext } from 'contexts';
 import { userHooks } from 'hooks';
 import React, { useContext, useState } from 'react';
@@ -8,7 +8,7 @@ import { userServices } from 'services';
 
 const { Header } = Layout;
 
-export const AppHeader = () => {
+const AppHeader = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [email, setEmail] = useState<string>('');
@@ -86,3 +86,5 @@ export const AppHeader = () => {
     </div>
   );
 };
+
+export default AppHeader;
