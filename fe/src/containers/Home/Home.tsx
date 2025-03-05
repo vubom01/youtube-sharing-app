@@ -1,4 +1,5 @@
 import { Spin } from 'antd';
+import { ListPosts } from 'containers/Home/ListPosts';
 import { StoreContext } from 'contexts';
 import { userHooks } from 'hooks';
 import { IUser } from 'interfaces/user';
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
       <StoreContext.Provider value={{ currentUser, setCurrentUser }}>
         <AppHeader />
         <Suspense fallback={<div />}>
-          <div>Trang chủ</div>
+          <ListPosts />
         </Suspense>
       </StoreContext.Provider>
     </div>

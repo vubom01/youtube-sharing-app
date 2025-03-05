@@ -44,7 +44,7 @@ export const AppHeader = () => {
     <div>
       {contextHolder}
       {loading && <Spin fullscreen></Spin>}
-      <Header style={{ backgroundColor: 'grey' }}>
+      <Header style={{ backgroundColor: 'whitesmoke ' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Space>
             <HomeOutlined size={2} />

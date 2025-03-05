@@ -1,5 +1,5 @@
 import { Input, Modal } from 'antd';
-import { YOUTUBE_REGEX } from 'constants/youtube';
+import { getYoutubeId } from 'helpers/youtube';
 import React, { useState } from 'react';
 import { youtubeServices } from 'services';
 
@@ -14,11 +14,6 @@ const SharePostModal: React.FC<ISharePostModalProps> = (props) => {
 
   const onCloseModal = () => {
     setShowModal(false);
-  };
-
-  const getYoutubeId = (url: string) => {
-    const match = url.match(YOUTUBE_REGEX);
-    return match && match[7].length === 11 ? match[7] : null;
   };
 
   const onCreatePost = async () => {
