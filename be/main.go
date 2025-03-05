@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/youtubeSharing/connectors/mysql"
@@ -13,6 +14,15 @@ import (
 func initRouter() *gin.Engine {
 	gin.SetMode(os.Getenv("GIN_MODE"))
 	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOriginFunc: func(origin string) bool {
+			return true
+		},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+	}))
+
 	authHandler := auth.NewHandler()
 	router.POST("/api/v1/login", authHandler.Login)
 
