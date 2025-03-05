@@ -14,7 +14,7 @@ func initRouter() *gin.Engine {
 	gin.SetMode(os.Getenv("GIN_MODE"))
 	router := gin.Default()
 	authHandler := auth.NewHandler()
-	router.POST("/api/v1/auth/signup", authHandler.Signup)
+	router.POST("/api/v1/login", authHandler.Login)
 
 	postsHandler := posts.NewHandler()
 	router.POST("/api/v1/posts", postsHandler.CreatePost)

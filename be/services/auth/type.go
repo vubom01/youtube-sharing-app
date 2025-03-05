@@ -1,14 +1,10 @@
 package auth
 
-type SignupReq struct {
+type LoginReq struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-type BaseRes struct {
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
+type LoginResp struct {
+	AccessToken string `json:"accessToken"`
 }
-
-var SuccessMessage = "Success"
-var ErrInternal = "Internal error"
