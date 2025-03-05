@@ -117,10 +117,7 @@ export const ListPosts = () => {
             <Row gutter={[10, 10]}>
               <Col span={14}>
                 <div className="video-container">
-                  <YouTube
-                    videoId={getYoutubeId(item.youtubeURL)!}
-                    opts={{ playerVars: { autoplay: 1 } }}
-                  />
+                  <YouTube videoId={getYoutubeId(item.youtubeURL)!} />
                 </div>
               </Col>
               <Col span={10}>

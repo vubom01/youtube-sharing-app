@@ -17,4 +17,5 @@ type PostItem struct {
 
 type ListPostResp struct {
 	Posts []PostItem `json:"posts"`
+	Total int64      `json:"total"`
 }

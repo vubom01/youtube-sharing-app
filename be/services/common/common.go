@@ -38,16 +38,16 @@ func GetCurrentUser(c *gin.Context) (models.User, error) {
 	return user, nil
 }
 
-func GetPagination(c *gin.Context) (Pagination, error) {
+func GetPagination(c *gin.Context) (PaginationReq, error) {
 	page := int64(1)
-	pageSize := int64(20)
+	pageSize := int64(5)
 	var err error
 
 	pageStr := strings.TrimSpace(c.Query("page"))
 	if len(pageStr) > 0 {
 		page, err = util.StringToInt64(pageStr)
 		if err != nil {
-			return Pagination{}, ErrInvalidPagination
+			return PaginationReq{}, ErrInvalidPagination
 		}
 	}
 
@@ -55,14 +55,14 @@ func GetPagination(c *gin.Context) (Pagination, error) {
 	if len(pageSizeStr) > 0 {
 		pageSize, err = util.StringToInt64(pageSizeStr)
 		if err != nil {
-			return Pagination{}, ErrInvalidPagination
+			return PaginationReq{}, ErrInvalidPagination
 		}
 	}
 
-	if page < 0 || pageSize < 0 {
-		return Pagination{}, ErrInvalidPagination
+	if page <= 0 || pageSize <= 0 {
+		return PaginationReq{}, ErrInvalidPagination
 	}
-	return Pagination{
+	return PaginationReq{
 		Page:     page,
 		PageSize: pageSize,
 	}, nil

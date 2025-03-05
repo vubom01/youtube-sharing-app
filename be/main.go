@@ -24,13 +24,15 @@ func initRouter() *gin.Engine {
 	}))
 
 	authHandler := auth.NewHandler()
+	postsHandler := posts.NewHandler()
 	router.POST("/api/v1/login", authHandler.Login)
+	router.GET("/api/v1/posts", postsHandler.List)
 
 	authInterceptor := auth.NewInterceptor()
 	router.Use(authInterceptor.Authentication())
+
 	router.GET("/api/v1/me", authHandler.Me)
 
-	postsHandler := posts.NewHandler()
 	router.POST("/api/v1/posts", postsHandler.CreatePost)
 	return router
 }

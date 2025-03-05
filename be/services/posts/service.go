@@ -34,5 +34,29 @@ func toPostModel(userId int64, req CreatePostReq) models.Post {
 }
 
 func (s *Service) List(req common.PaginationReq) (ListPostResp, error) {
-	return ListPostResp{}, nil
+	posts, total, err := s.repo.List(req.Page, req.PageSize)
+	if err != nil {
+		return ListPostResp{}, common.ErrExecuteIntoDB
+	}
+
+	var resp []PostItem
+	for _, post := range posts {
+		resp = append(resp, toPostItem(post))
+	}
+
+	return ListPostResp{
+		Posts: resp,
+		Total: total,
+	}, nil
+}
+
+func toPostItem(post models.PostDetail) PostItem {
+	return PostItem{
+		Id:          post.Id,
+		UserEmail:   post.Email,
+		UserId:      post.UserId,
+		YoutubeURL:  post.YoutubeURL,
+		Title:       post.Title,
+		Description: post.Description,
+	}
 }
