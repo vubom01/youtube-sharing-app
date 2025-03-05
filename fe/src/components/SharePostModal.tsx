@@ -1,7 +1,7 @@
 import { Input, Modal } from 'antd';
 import { YOUTUBE_REGEX } from 'constants/youtube';
 import React, { useState } from 'react';
-import { getYoutubeMetadata } from 'services/youtube';
+import { youtubeServices } from 'services';
 
 interface ISharePostModalProps {
   showModal: boolean;
@@ -23,7 +23,7 @@ const SharePostModal: React.FC<ISharePostModalProps> = (props) => {
 
   const onCreatePost = async () => {
     const youtubeLink = getYoutubeId(youtubeURL!);
-    const metadata = await getYoutubeMetadata(youtubeLink!);
+    const metadata = await youtubeServices.getYoutubeMetadata(youtubeLink!);
     console.log(metadata);
   };
 
