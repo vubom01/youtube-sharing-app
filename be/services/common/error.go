@@ -13,3 +13,5 @@ var ErrUnauthenticated = errors.New(401, 401, "unauthenticated")
 var ErrInvalid = errors.New(402, 402, "field is invalid")
 
 var ErrInvalidPagination = errors.WithMessage(ErrInvalid, "pagination is invalid")
+
+var ErrNotFound = errors.New(404, 404, "item not found")

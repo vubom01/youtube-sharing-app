@@ -7,6 +7,7 @@ import (
 	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/services/auth"
 	"github.com/youtubeSharing/services/posts"
+	"github.com/youtubeSharing/services/youtube"
 	"log"
 	"os"
 )
@@ -25,8 +26,10 @@ func initRouter() *gin.Engine {
 
 	authHandler := auth.NewHandler()
 	postsHandler := posts.NewHandler()
+	youtubeHandler := youtube.NewHandler()
 	router.POST("/api/v1/login", authHandler.Login)
 	router.GET("/api/v1/posts", postsHandler.List)
+	router.GET("/api/v1/youtube", youtubeHandler.Detail)
 
 	authInterceptor := auth.NewInterceptor()
 	router.Use(authInterceptor.Authentication())

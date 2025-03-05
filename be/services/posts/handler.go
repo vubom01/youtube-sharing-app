@@ -53,6 +53,7 @@ func (h *Handler) CreatePost(c *gin.Context) {
 // @Success      200
 // @Router       /api/v1/posts [get]
 // @Param 		 page query int false "page"
+// @Param		 pageSize query int false "pageSize"
 // @Success		 200 {object} ListOutput "Success"
 func (h *Handler) List(c *gin.Context) {
 	pagination, err := common.GetPagination(c)
