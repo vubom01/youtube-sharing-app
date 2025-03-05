@@ -76,7 +76,11 @@ export const AppHeader = () => {
           )}
         </div>
       </Header>
-      <SharePostModal showModal={showModal} setShowModal={setShowModal} />
+      <SharePostModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        messageApi={messageApi}
+      />
     </div>
   );
 };
