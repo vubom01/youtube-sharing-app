@@ -1,7 +1,7 @@
 import { MessageInstance } from 'antd/es/message/interface';
-import { StoreContext } from 'contexts';
 import { useContext, useState } from 'react';
-import { userServices } from 'services';
+import { StoreContext } from 'src/contexts';
+import { userServices } from 'src/services';
 
 const useLogin = (messageApi: MessageInstance) => {
   const [loading, setLoading] = useState(false);

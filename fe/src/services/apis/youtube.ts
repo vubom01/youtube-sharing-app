@@ -1,6 +1,6 @@
-import { getData } from 'helpers/request';
-import { IYouTubeInfo } from 'interfaces/youtube';
-import { requestServices } from 'services/index';
+import { getData } from 'src/helpers/request';
+import { IYouTubeInfo } from 'src/interfaces/youtube';
+import { requestServices } from 'src/services/index';
 
 const { baseClient } = requestServices;
 

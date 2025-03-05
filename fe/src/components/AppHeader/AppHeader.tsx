@@ -1,10 +1,10 @@
 import { HomeOutlined } from '@ant-design/icons';
 import { Button, Input, Layout, message, Space, Spin } from 'antd';
-import SharePostModal from 'components/SharePostModal';
-import { StoreContext } from 'contexts';
-import { userHooks } from 'hooks';
 import React, { useContext, useState } from 'react';
-import { userServices } from 'services';
+import SharePostModal from 'src/components/SharePostModal';
+import { StoreContext } from 'src/contexts';
+import { userHooks } from 'src/hooks';
+import { userServices } from 'src/services';
 
 const { Header } = Layout;
 

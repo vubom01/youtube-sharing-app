@@ -1,9 +1,9 @@
 import { MessageInstance } from 'antd/es/message/interface';
-import { DEFAULT_PARAMS } from 'constants/common';
-import { getYoutubeId } from 'helpers/youtube';
-import { ICreatePost, IListPostsReq, IPost } from 'interfaces/post';
 import { useEffect, useState } from 'react';
-import { postServices, youtubeServices } from 'services';
+import { DEFAULT_PARAMS } from 'src/constants/common';
+import { getYoutubeId } from 'src/helpers/youtube';
+import { ICreatePost, IListPostsReq, IPost } from 'src/interfaces/post';
+import { postServices, youtubeServices } from 'src/services';
 
 const useCreatePost = (messageApi: MessageInstance) => {
   const [loading, setLoading] = useState(false);

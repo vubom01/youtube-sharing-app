@@ -1,6 +1,10 @@
-import { getData } from 'helpers/request';
-import { ICreatePost, IListPostsReq, IListPostsResp } from 'interfaces/post';
-import { requestServices } from 'services/index';
+import { getData } from 'src/helpers/request';
+import {
+  ICreatePost,
+  IListPostsReq,
+  IListPostsResp,
+} from 'src/interfaces/post';
+import { requestServices } from 'src/services/index';
 
 const { baseClient } = requestServices;
 

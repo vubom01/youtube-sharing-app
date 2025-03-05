@@ -1,5 +1,5 @@
-import { IUser } from 'interfaces/user';
 import { createContext } from 'react';
+import { IUser } from 'src/interfaces/user';
 
 const userMock: IUser = {
   id: 1,

@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
     "target": "es5",
     "lib": [
       "dom",
@@ -19,14 +23,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src"
+    "baseUrl": "./"
   },
   "include": [
-    "src"
-  ],
-  "paths": {
-    "react": [
-      "./node_modules/@types/react"
-    ]
-  }
+    "src",
+    "src/setupTests.ts"
+  ]
 }

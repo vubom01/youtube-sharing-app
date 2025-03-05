@@ -1,10 +1,10 @@
 import { Spin } from 'antd';
-import AppHeader from 'components/AppHeader';
-import ListPosts from 'components/ListPosts';
-import { StoreContext } from 'contexts';
-import { userHooks } from 'hooks';
-import { IUser } from 'interfaces/user';
 import React, { Suspense, useEffect, useState } from 'react';
+import AppHeader from 'src/components/AppHeader';
+import ListPosts from 'src/components/ListPosts';
+import { StoreContext } from 'src/contexts';
+import { userHooks } from 'src/hooks';
+import { IUser } from 'src/interfaces/user';
 
 const Home: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ paddingBottom: '10px' }}>
+    <div style={{ paddingBottom: '10px' }} data-testid="home-page">
       {loading && <Spin fullscreen></Spin>}
       <StoreContext.Provider value={{ currentUser, setCurrentUser }}>
         <AppHeader />

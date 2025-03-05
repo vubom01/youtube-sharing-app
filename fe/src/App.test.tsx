@@ -1,9 +1,10 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { describe, it } from 'vitest';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('<App />', () => {
+  it('renders Home component on root path', () => {
+    render(<App />);
+    expect(screen.getByText(/Funny Movies/i)).toBeInTheDocument();
+  });
 });

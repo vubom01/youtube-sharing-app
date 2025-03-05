@@ -1,4 +1,4 @@
-import { YOUTUBE_REGEX } from 'constants/youtube';
+import { YOUTUBE_REGEX } from 'src/constants/youtube';
 
 export const getYoutubeId = (url: string) => {
   const match = url.match(YOUTUBE_REGEX);

@@ -1,9 +1,9 @@
 import { Col, List, Row } from 'antd';
-import { DEFAULT_PAGE_SIZE } from 'constants/common';
-import { getYoutubeId } from 'helpers/youtube';
-import { postHooks } from 'hooks';
 import React from 'react';
 import YouTube from 'react-youtube';
+import { DEFAULT_PAGE_SIZE } from 'src/constants/common';
+import { getYoutubeId } from 'src/helpers/youtube';
+import { postHooks } from 'src/hooks';
 import './ListPosts.css';
 
 const ListPosts = () => {

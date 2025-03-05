@@ -1,6 +1,6 @@
-import { getData } from 'helpers/request';
-import { IUser } from 'interfaces/user';
-import { requestServices } from 'services/index';
+import { getData } from 'src/helpers/request';
+import { IUser } from 'src/interfaces/user';
+import { requestServices } from 'src/services/index';
 
 const { baseClient } = requestServices;
 

@@ -1,7 +1,7 @@
 import { Input, Modal } from 'antd';
 import { MessageInstance } from 'antd/es/message/interface';
-import { postHooks } from 'hooks';
 import React, { useState } from 'react';
+import { postHooks } from 'src/hooks';
 
 interface ISharePostModalProps {
   showModal: boolean;
