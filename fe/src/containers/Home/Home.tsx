@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingBottom: '10px' }}>
       {loading && <Spin fullscreen></Spin>}
       <StoreContext.Provider value={{ currentUser, setCurrentUser }}>
         <AppHeader />
