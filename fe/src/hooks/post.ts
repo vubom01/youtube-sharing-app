@@ -13,7 +13,6 @@ const useCreatePost = (messageApi: MessageInstance) => {
       setLoading(true);
       const youtubeLink = getYoutubeId(youtubeURL);
       const metadata = await youtubeServices.getYoutubeMetadata(youtubeLink!);
-      console.log(metadata);
       const req: ICreatePost = {
         youtubeURL: youtubeURL,
         title: metadata.title,
