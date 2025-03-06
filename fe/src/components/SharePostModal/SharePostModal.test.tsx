@@ -25,6 +25,7 @@ describe('<SharePostModal />', () => {
       />
     );
     expect(screen.getByText('Youtube URL:')).toBeInTheDocument();
+    expect(screen.getByTestId('youtubeInput')).toBeInTheDocument();
   });
 
   it('close modal', () => {
