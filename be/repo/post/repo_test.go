@@ -26,8 +26,9 @@ func Test_InsertPost(t *testing.T) {
 		Title:       "Test Post",
 		Description: "Test Description",
 	}
-	err := repo.InsertPost(input)
+	postId, err := repo.InsertPost(input)
 	assert.Nil(t, err)
+	assert.True(t, postId > 0)
 }
 
 func Test_List(t *testing.T) {
@@ -49,12 +50,13 @@ func Test_List(t *testing.T) {
 		Title:       "Test Post",
 		Description: "Test Description",
 	}
-	err = repo.InsertPost(postInput)
+	postId, err := repo.InsertPost(postInput)
 	assert.Nil(t, err)
 
 	posts, total, err := repo.List(1, 1)
 	assert.Nil(t, err)
-	assert.Equal(t, user.Id, posts[0].Id)
+	assert.Equal(t, postId, posts[0].Id)
+	assert.Equal(t, user.Id, posts[0].UserId)
 	assert.Equal(t, user.Email, posts[0].Email)
 	assert.Equal(t, int64(1), total)
 }

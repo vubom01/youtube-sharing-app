@@ -37,12 +37,12 @@ func (h *Handler) CreatePost(c *gin.Context) {
 		common.WriteError(c, common.ErrBadRequest)
 		return
 	}
-	err = h.service.CreatePost(user.Id, req)
+	res, err := h.service.CreatePost(user.Id, req)
 	if err != nil {
 		common.WriteError(c, err)
 		return
 	}
-	common.WriteSuccess(c, nil)
+	common.WriteSuccess(c, res)
 }
 
 // List godoc

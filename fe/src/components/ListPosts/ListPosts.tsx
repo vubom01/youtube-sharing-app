@@ -1,13 +1,30 @@
 import { Col, List, Row } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import YouTube from 'react-youtube';
 import { DEFAULT_PAGE_SIZE } from 'src/constants/common';
 import { getYoutubeId } from 'src/helpers/youtube';
 import { postHooks } from 'src/hooks';
 import './ListPosts.css';
+import { IPost } from 'src/interfaces/post';
 
-const ListPosts = () => {
-  const { loading, posts, total, params, setParams } = postHooks.useListPosts();
+export interface IListPostsProps {
+  lastMessage: WebSocketEventMap['message'] | null;
+}
+
+const ListPosts = (props: IListPostsProps) => {
+  const { lastMessage } = props;
+
+  const { loading, posts, total, params, setParams, setPosts, setTotal } =
+    postHooks.useListPosts();
+
+  useEffect(() => {
+    if (!lastMessage) {
+      return;
+    }
+    const newPost: IPost = JSON.parse(lastMessage.data);
+    setPosts([newPost, ...posts]);
+    setTotal(total + 1);
+  }, [lastMessage]);
 
   return (
     <div

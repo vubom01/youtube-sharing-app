@@ -3,18 +3,19 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
 	"github.com/youtubeSharing/connectors/mysql"
 	"github.com/youtubeSharing/services/auth"
 	"github.com/youtubeSharing/services/posts"
+	"github.com/youtubeSharing/services/socket"
 	"github.com/youtubeSharing/services/youtube"
 	"log"
-	"net/http"
 	"os"
 )
 
 func initRouter() *gin.Engine {
+	go socket.Broadcaster()
+
 	gin.SetMode(os.Getenv("GIN_MODE"))
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
@@ -25,7 +26,9 @@ func initRouter() *gin.Engine {
 		AllowHeaders:     []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}))
-	router.GET("/ws", handleWebSocket)
+
+	router.GET("/ws", socket.HandleWebSocket)
+
 	authHandler := auth.NewHandler()
 	postsHandler := posts.NewHandler()
 	youtubeHandler := youtube.NewHandler()
@@ -39,6 +42,8 @@ func initRouter() *gin.Engine {
 	router.GET("/api/v1/me", authHandler.Me)
 
 	router.POST("/api/v1/posts", postsHandler.CreatePost)
+
+	log.Println("Listening on :8000")
 	return router
 }
 
@@ -59,39 +64,5 @@ func main() {
 	err = router.Run()
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err.Error())
-	}
-}
-
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-}
-
-func handleWebSocket(c *gin.Context) {
-	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
-	if err != nil {
-		log.Println("WebSocket upgrade failed:", err)
-		return
-	}
-	defer conn.Close()
-
-	log.Println("New WebSocket connection established")
-
-	for {
-		// Read message from client
-		_, msg, err := conn.ReadMessage()
-		if err != nil {
-			log.Println("WebSocket read error:", err)
-			break
-		}
-		log.Printf("Received: %s\n", msg)
-
-		// Echo message back to client
-		err = conn.WriteMessage(websocket.TextMessage, msg)
-		if err != nil {
-			log.Println("WebSocket write error:", err)
-			break
-		}
 	}
 }

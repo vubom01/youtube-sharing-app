@@ -9,7 +9,7 @@ import (
 //go:generate moq -out repo_mocks.go . IRepo
 
 type IRepo interface {
-	InsertPost(post models.Post) error
+	InsertPost(post models.Post) (int64, error)
 	List(page int64, pageSize int64) ([]models.PostDetail, int64, error)
 }
 
@@ -23,13 +23,21 @@ func NewRepo(conn *sqlx.DB) IRepo {
 	}
 }
 
-func (r *Repo) InsertPost(post models.Post) error {
+func (r *Repo) InsertPost(post models.Post) (int64, error) {
 	query := `INSERT INTO posts(user_id, youtube_url, title, description) VALUE(:user_id, :youtube_url, :title, :description)`
-	_, err := r.conn.NamedExec(query, post)
+	result, err := r.conn.NamedExec(query, post)
 	if err != nil {
 		log.Printf("Error inserting post: %s", err.Error())
+		return 0, err
 	}
-	return err
+
+	postId, err := result.LastInsertId()
+	if err != nil {
+		log.Printf("Error getting last insert ID: %s", err.Error())
+		return 0, err
+	}
+
+	return postId, err
 }
 
 const listQuery = `

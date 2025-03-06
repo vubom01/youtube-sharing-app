@@ -17,12 +17,12 @@ func NewService() *Service {
 	}
 }
 
-func (s *Service) CreatePost(userId int64, req CreatePostReq) error {
-	err := s.repo.InsertPost(toPostModel(userId, req))
+func (s *Service) CreatePost(userId int64, req CreatePostReq) (int64, error) {
+	postId, err := s.repo.InsertPost(toPostModel(userId, req))
 	if err != nil {
-		return common.ErrExecuteIntoDB
+		return 0, common.ErrExecuteIntoDB
 	}
-	return nil
+	return postId, nil
 }
 
 func toPostModel(userId int64, req CreatePostReq) models.Post {

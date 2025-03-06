@@ -1,6 +1,7 @@
 import { HomeOutlined } from '@ant-design/icons';
 import { Button, Input, Layout, message, Space, Spin } from 'antd';
 import React, { useContext, useState } from 'react';
+import { WebSocketMessage } from 'react-use-websocket/src/lib/types';
 import SharePostModal from 'src/components/SharePostModal';
 import { StoreContext } from 'src/contexts';
 import { userHooks } from 'src/hooks';
@@ -8,7 +9,13 @@ import { userServices } from 'src/services';
 
 const { Header } = Layout;
 
-const AppHeader = () => {
+export interface IAppHeaderProps {
+  sendMessage: (message: WebSocketMessage, keep?: boolean) => void;
+}
+
+const AppHeader = (props: IAppHeaderProps) => {
+  const { sendMessage } = props;
+
   const [messageApi, contextHolder] = message.useMessage();
 
   const [email, setEmail] = useState<string>('');
@@ -82,6 +89,7 @@ const AppHeader = () => {
         showModal={showModal}
         setShowModal={setShowModal}
         messageApi={messageApi}
+        sendMessage={sendMessage}
       />
     </div>
   );

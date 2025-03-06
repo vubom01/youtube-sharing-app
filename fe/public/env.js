@@ -1,5 +1,6 @@
 window.config = {
   apiServices: {
-    client: 'http://0.0.0.0:8000/api',
+    endpoint: 'http://0.0.0.0:8000/api/v1',
+    webSocket: 'ws://0.0.0.0:8000/ws',
   },
 };

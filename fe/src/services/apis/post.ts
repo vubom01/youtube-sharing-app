@@ -8,7 +8,7 @@ import { requestServices } from 'src/services/index';
 
 const { baseClient } = requestServices;
 
-const createPost = async (req: ICreatePost) => {
+const createPost = async (req: ICreatePost): Promise<{ postId: number }> => {
   const response = await baseClient.post('/posts', req);
   return getData(response);
 };

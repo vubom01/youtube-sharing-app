@@ -1,12 +1,14 @@
 import { Input, Modal } from 'antd';
 import { MessageInstance } from 'antd/es/message/interface';
 import React, { useState } from 'react';
+import { WebSocketMessage } from 'react-use-websocket/src/lib/types';
 import { postHooks } from 'src/hooks';
 
 interface ISharePostModalProps {
   showModal: boolean;
   setShowModal: (show: boolean) => void;
   messageApi: MessageInstance;
+  sendMessage: (message: WebSocketMessage, keep?: boolean) => void;
 }
 
 export const isValidYouTubeUrl = (url: string) => {
@@ -16,10 +18,11 @@ export const isValidYouTubeUrl = (url: string) => {
 };
 
 const SharePostModal = (props: ISharePostModalProps) => {
-  const { showModal, setShowModal, messageApi } = props;
+  const { showModal, setShowModal, messageApi, sendMessage } = props;
+
   const [youtubeURL, setYouTubeURL] = useState<string>('');
 
-  const { createPost } = postHooks.useCreatePost(messageApi);
+  const { createPost } = postHooks.useCreatePost(messageApi, sendMessage);
 
   const onCloseModal = () => {
     setShowModal(false);

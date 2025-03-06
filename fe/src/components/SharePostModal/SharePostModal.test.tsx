@@ -6,6 +6,7 @@ import SharePostModal, { isValidYouTubeUrl } from './SharePostModal';
 
 const mockMessageApi = { error: vi.fn() } as unknown as MessageInstance;
 const setShowModal = vi.fn();
+const sendMessage = vi.fn();
 
 vi.mock('src/hooks', () => ({
   postHooks: {
@@ -22,6 +23,7 @@ describe('<SharePostModal />', () => {
         showModal={true}
         setShowModal={setShowModal}
         messageApi={mockMessageApi}
+        sendMessage={sendMessage}
       />
     );
     expect(screen.getByText('Youtube URL:')).toBeInTheDocument();
@@ -34,6 +36,7 @@ describe('<SharePostModal />', () => {
         showModal={true}
         setShowModal={setShowModal}
         messageApi={mockMessageApi}
+        sendMessage={sendMessage}
       />
     );
     fireEvent.click(screen.getByRole('button', { name: /cancel/i }));
@@ -54,6 +57,7 @@ describe('<SharePostModal />', () => {
         showModal={true}
         setShowModal={setShowModal}
         messageApi={mockMessageApi}
+        sendMessage={sendMessage}
       />
     );
 
@@ -79,6 +83,7 @@ describe('<SharePostModal />', () => {
         showModal={true}
         setShowModal={setShowModal}
         messageApi={mockMessageApi}
+        sendMessage={sendMessage}
       />
     );
 

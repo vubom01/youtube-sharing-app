@@ -20,12 +20,13 @@ func newTestService() Service {
 
 func Test_CreatePost(t *testing.T) {
 	s := newTestService()
-	err := s.CreatePost(999, CreatePostReq{
+	postId, err := s.CreatePost(999, CreatePostReq{
 		YoutubeURL:  "https://www.youtube.com",
 		Title:       "title post",
 		Description: "description post",
 	})
 	assert.Nil(t, err)
+	assert.True(t, postId > 0)
 }
 
 func Test_List(t *testing.T) {
