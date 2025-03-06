@@ -1,10 +1,10 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { userServices } from '../index';
+import { userServices } from 'src/services/index';
 
-const { apiServices } = window.config;
+const { apiServices } = window.config ?? {};
 
 const baseClient = axios.create({
-  baseURL: apiServices.endpoint,
+  baseURL: apiServices?.endpoint ?? 'http://localhost:8000/api/v1',
 });
 
 const getAuthorization = () => {

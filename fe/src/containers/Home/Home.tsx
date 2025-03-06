@@ -7,8 +7,8 @@ import { StoreContext } from 'src/contexts';
 import { userHooks } from 'src/hooks';
 import { IUser } from 'src/interfaces/user';
 
-const { apiServices } = window.config;
-const WS_URL = apiServices.webSocket;
+const { apiServices } = window.config ?? {};
+const WS_URL = apiServices?.webSocket ?? 'ws://localhost:8000/ws';
 
 const Home: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);
