@@ -17,7 +17,7 @@ The purpose of this application is to allow users to log in and share YouTube vi
 
 ## 3. Installation & Configuration
 
-Clone the respository
+Clone the repository
 
 ```
 $ git clone git@github.com:vubom01/youtube-sharing-app.git
