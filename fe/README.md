@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# YouTube Video Sharing App FE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Introduction
 
-## Available Scripts
+YouTube Video Sharing App FE is a frontend application built using ReactJS and TypeScript.
+The purpose of this application is to allow users to log in and share YouTube videos. Key features include:
 
-In the project directory, you can run:
+- User Authentication: Users can log in to the system.
+- Video Sharing: Users can share YouTube videos by submitting a URL.
+- Real-time Notifications: Logged-in users receive real-time notifications when another user shares a video.
+  Non-logged-in users will not receive notifications.
 
-### `npm start`
+## 2. Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js: v23.5.0
+- yarn: v1.22.22
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 3. Installation & Configuration
 
-### `npm test`
+Clone the respository
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+$ git clone git@github.com:vubom01/youtube-sharing-app.git
+$ cd fe
+```
 
-### `npm run build`
+Install dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ yarn install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 4. Running the Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run the application
 
-### `npm run eject`
+```
+$ yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open your browser and navigate to: localhost:3000
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+$ yarn test
+$ yarn coverage
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 5. Usage
 
-## Learn More
+### Login/ Register:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Enter your email and password
+- Click the Login/ Register button
+- If the email is not registered, a new account will be created
+- If the email already exists, the system will authenticate the login
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Share Video:
+
+- After login, click the Sharing a Video button
+- Enter a valid YouTube video link in the input field
+- Click OK to share the video
+- Other logged-in users will receive a real-time notification of the new shared video
+
+### View Videos:
+
+- Users can browse and watch videos shared by anyone
+
+## 6. Troubleshooting
+
+Configure environment variables in /public/env.js file and updating the necessary configuration

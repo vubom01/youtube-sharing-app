@@ -62,7 +62,7 @@ const AppHeader = (props: IAppHeaderProps) => {
               <div>
                 Welcome <b>{currentUser?.email}</b>
               </div>
-              <Button onClick={onSharePost}>Share a movie</Button>
+              <Button onClick={onSharePost}>Share a Video</Button>
               <Button onClick={onLogout}>Logout</Button>
             </Space>
           ) : (
