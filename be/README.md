@@ -29,6 +29,7 @@ Install dependencies
 ```
 $ go mod tidy
 $ make install-tools
+$ make go-gen
 ```
 
 Set up the environment variables in a .env file
