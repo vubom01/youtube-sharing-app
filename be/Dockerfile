@@ -14,4 +14,4 @@ COPY --from=builder /app/bin/ /app/bin/
 COPY .env .env
 COPY migration migration
 EXPOSE 8000
-CMD ["/bin/sh", "-c", "sleep 20 && ./migrate up && ./server"]
+CMD ["/bin/sh", "-c", "sleep 10 && ./migrate up && ./server"]
