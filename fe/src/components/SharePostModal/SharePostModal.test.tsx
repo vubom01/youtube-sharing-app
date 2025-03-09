@@ -8,10 +8,15 @@ const mockMessageApi = { error: vi.fn() } as unknown as MessageInstance;
 const setShowModal = vi.fn();
 const sendMessage = vi.fn();
 
+const createPostMock = vi.fn(() => Promise.resolve(true));
+(postHooks.useCreatePost as unknown as any).mockReturnValue({
+  createPost: createPostMock,
+});
+
 vi.mock('src/hooks', () => ({
   postHooks: {
     useCreatePost: vi.fn(() => ({
-      createPost: vi.fn(() => Promise.resolve(true)),
+      createPost: createPostMock,
     })),
   },
 }));
@@ -27,7 +32,7 @@ describe('<SharePostModal />', () => {
       />
     );
     expect(screen.getByText('Youtube URL:')).toBeInTheDocument();
-    expect(screen.getByTestId('youtubeInput')).toBeInTheDocument();
+    expect(screen.getByTestId('youtube-input')).toBeInTheDocument();
   });
 
   it('close modal', () => {
@@ -61,7 +66,7 @@ describe('<SharePostModal />', () => {
       />
     );
 
-    const input = screen.getByTestId('youtubeInput');
+    const input = screen.getByTestId('youtube-input');
     fireEvent.change(input, { target: { value: 'invalid-url' } });
     fireEvent.click(screen.getByRole('button', { name: /ok/i }));
 
@@ -73,11 +78,6 @@ describe('<SharePostModal />', () => {
   });
 
   it('createPost successfully', async () => {
-    const createPostMock = vi.fn(() => Promise.resolve(true));
-    (postHooks.useCreatePost as unknown as any).mockReturnValue({
-      createPost: createPostMock,
-    });
-
     render(
       <SharePostModal
         showModal={true}
@@ -87,7 +87,7 @@ describe('<SharePostModal />', () => {
       />
     );
 
-    const input = screen.getByTestId('youtubeInput');
+    const input = screen.getByTestId('youtube-input');
     fireEvent.change(input, {
       target: { value: 'https://www.youtube.com/watch?v=999999' },
     });

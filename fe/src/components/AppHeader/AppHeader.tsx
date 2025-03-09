@@ -50,7 +50,7 @@ const AppHeader = (props: IAppHeaderProps) => {
   return (
     <div>
       {contextHolder}
-      {loading && <Spin fullscreen></Spin>}
+      {loading && <Spin data-testid="spin" fullscreen></Spin>}
       <Header style={{ backgroundColor: 'whitesmoke ' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Space>
@@ -58,29 +58,36 @@ const AppHeader = (props: IAppHeaderProps) => {
             <div style={{ fontWeight: 'bold', fontSize: 24 }}>Funny Movies</div>
           </Space>
           {currentUser ? (
-            <Space>
+            <Space data-testid="current-user-info">
               <div>
                 Welcome <b>{currentUser?.email}</b>
               </div>
-              <Button onClick={onSharePost}>Share a Video</Button>
-              <Button onClick={onLogout}>Logout</Button>
+              <Button data-testid="share-video-button" onClick={onSharePost}>
+                Share a Video
+              </Button>
+              <Button data-testid="logout-button" onClick={onLogout}>
+                Logout
+              </Button>
             </Space>
           ) : (
-            <Space>
+            <Space data-testid="login-form">
               <div>
                 <Input
+                  data-testid="email-input"
                   placeholder="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-
               <Input.Password
+                data-testid="password-input"
                 placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button onClick={onLogin}>Login/ Register</Button>
+              <Button data-testid="login-button" onClick={onLogin}>
+                Login/ Register
+              </Button>
             </Space>
           )}
         </div>

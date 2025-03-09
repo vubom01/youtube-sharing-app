@@ -46,7 +46,7 @@ const SharePostModal = (props: ISharePostModalProps) => {
       <Modal open={showModal} onCancel={onCloseModal} onOk={onCreatePost}>
         <div>Youtube URL:</div>
         <Input
-          data-testid="youtubeInput"
+          data-testid="youtube-input"
           value={youtubeURL}
           onChange={(e) => setYouTubeURL(e.target.value)}
           placeholder="https://www.youtube.com/watch?v="
