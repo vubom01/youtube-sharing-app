@@ -49,7 +49,7 @@ vi.mock('antd', async (importOriginal) => {
     ...antd,
     message: {
       ...antd.message,
-      useMessage: vi.fn(() => [mockMessageApi, <></>]), // Mock tuple correctly
+      useMessage: vi.fn(() => [mockMessageApi, <></>]),
     },
   };
 });
@@ -86,7 +86,7 @@ describe('<AppHeader />', () => {
   });
 
   it('shows error message when email is empty', async () => {
-    const [mockMessageApi] = message.useMessage(); // Get the mocked message API
+    const [mockMessageApi] = message.useMessage();
 
     render(
       <StoreContext.Provider value={{ currentUser: undefined, setCurrentUser }}>
@@ -108,7 +108,7 @@ describe('<AppHeader />', () => {
   });
 
   it('shows error message when password is empty', async () => {
-    const [mockMessageApi] = message.useMessage(); // Get the mocked message API
+    const [mockMessageApi] = message.useMessage();
 
     render(
       <StoreContext.Provider value={{ currentUser: undefined, setCurrentUser }}>

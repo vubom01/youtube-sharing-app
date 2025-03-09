@@ -55,6 +55,7 @@ const ListPosts = (props: IListPostsProps) => {
           margin: 'auto',
           paddingTop: '10px',
         }}
+        data-testid="list-posts"
       >
         <div>
           Total: <b>{total} videos</b>
