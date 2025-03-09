@@ -1,6 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MessageInstance } from 'antd/es/message/interface';
-import { postHooks } from 'src/hooks';
 import { describe, expect, it, vi } from 'vitest';
 import SharePostModal, { isValidYouTubeUrl } from './SharePostModal';
 
@@ -9,9 +8,6 @@ const setShowModal = vi.fn();
 const sendMessage = vi.fn();
 
 const createPostMock = vi.fn(() => Promise.resolve(true));
-(postHooks.useCreatePost as unknown as any).mockReturnValue({
-  createPost: createPostMock,
-});
 
 vi.mock('src/hooks', () => ({
   postHooks: {
