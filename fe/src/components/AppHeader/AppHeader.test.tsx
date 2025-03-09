@@ -10,10 +10,6 @@ const mockSendMessage = vi.fn();
 const setCurrentUser = vi.fn();
 
 const mockLogin = vi.fn(() => Promise.resolve(true));
-(userHooks.useLogin as any).mockReturnValue({
-  loading: false,
-  login: mockLogin,
-});
 
 vi.mock('src/hooks', () => ({
   userHooks: {
