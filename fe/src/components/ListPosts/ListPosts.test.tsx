@@ -31,6 +31,16 @@ const newMessage: any = {
   }),
 };
 
+(postHooks.useListPosts as any).mockReturnValue({
+  loading: false,
+  posts: defaultPosts,
+  total: 1,
+  params: { page: 1, pageSize: 10 },
+  setParams: mockSetParams,
+  setPosts: mockSetPosts,
+  setTotal: mockSetTotal,
+});
+
 vi.mock('src/hooks', () => ({
   postHooks: {
     useListPosts: vi.fn(),
@@ -52,18 +62,6 @@ vi.mock('antd', async (importOriginal) => {
 });
 
 describe('<ListPosts />', () => {
-  beforeEach(() => {
-    (postHooks.useListPosts as any).mockReturnValue({
-      loading: false,
-      posts: defaultPosts,
-      total: 1,
-      params: { page: 1, pageSize: 10 },
-      setParams: mockSetParams,
-      setPosts: mockSetPosts,
-      setTotal: mockSetTotal,
-    });
-  });
-
   it('renders the list of posts', () => {
     render(
       <StoreContext.Provider
