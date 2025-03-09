@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
   return (
     <div style={{ paddingBottom: '10px' }} data-testid="home-page">
-      {loading && <Spin fullscreen></Spin>}
+      {loading && <Spin data-testid="spin" fullscreen></Spin>}
       <StoreContext.Provider value={{ currentUser, setCurrentUser }}>
         <AppHeader sendMessage={sendMessage} />
         <Suspense fallback={<div />}>
