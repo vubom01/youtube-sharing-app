@@ -41,7 +41,7 @@ $ cp .env.example .env
 
 ## 4. Database Setup
 ```
-$ docker-compose up -d
+$ docker-compose up -d mysql
 $ make migrate-up
 ```
 
@@ -69,44 +69,8 @@ GIN_MODE=release
 SECRET_JWT=180501
 YOUTUBE_API_KEY=
 ```
-Update docker-compose.yaml file like this
-```
-services:
-  youtube-sharing-app-be:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: youtube-sharing-app-be
-    depends_on:
-      - mysql
-    env_file:
-      - .env
-    ports:
-      - "8000:8000"
-    networks:
-      - youtube-sharing
 
-  mysql:
-    image: mysql:8.0
-    container_name: youtube-sharing-app-mysql
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: youtube-sharing
-    networks:
-      - youtube-sharing
-
-networks:
-  youtube-sharing:
-
-volumes:
-  mysql_data:
-```
 Run docker
-
 ```
 $ docker compose up --build
 ```
